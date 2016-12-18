@@ -1,0 +1,25 @@
+String sql="create table CLIENTS"
+			 + "(C_ID integer NOT NULL AUTO_INCREMENT,"
+					 +" C_NAME varchar(40) NOT NULL,"
+					 +" C_CITY varchar(20) NOT NULL,"
+					 +" C_EMAIL varchar(255) NOT NULL,"
+					 +" C_PASS VARCHAR(255) NOT NULL,"
+					 +" C_MAGAZINE varchar(255)NOT NULL,"
+					 +" INVOICE numeric(10,2) NOT NULL,"
+					 +" PRIMARY KEY (C_ID),"
+					 +" FOREIGN KEY (C_MAGAZINE) REFERENCES MAGAZINE (M_NAME));"
+
+					+"create table SUPPLIERS"
+					 +" (SUP_ID integer NOT NULL  AUTO_INCREMENT,"
+					+"  SUP_NAME varchar(255) NOT NULL,"
+					+"  CITY varchar(20) NOT NULL,"
+					+"  PRIMARY KEY (SUP_ID));"
+					  
+					+"create table MAGAZINE"
+					+"  (M_NAME varchar(255) NOT NULL,"
+					+"  SUP_ID integer NOT NULL,"
+					+"  PRICE numeric(10,2) NOT NULL,"
+					+"  SALES integer NOT NULL,"
+					+"  PRIMARY KEY (M_NAME),"
+					+"  FOREIGN KEY (SUP_ID) REFERENCES SUPPLIERS (SUP_ID));";
+	

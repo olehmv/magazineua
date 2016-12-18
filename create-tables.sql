@@ -1,0 +1,41 @@
+
+
+create table SUPPLIERS
+  (SUP_ID integer NOT NULL  AUTO_INCREMENT,
+  SUP_NAME varchar(255) NOT NULL,
+  SUP_PRICE numeric(10,2) NOT NULL,
+  SUP_CITY varchar(20) NOT NULL,
+  SUP_DESCRIPTION longtext NUll,
+  SUP_IMAGE longblob NULL,
+  PRIMARY KEY (SUP_ID));
+
+
+  
+create table MAGAZINE
+  (M_NAME varchar(255) NOT NULL,
+  SUP_ID integer  NULL,
+  M_CITY varchar(255) NOT NUll,
+  M_PRICE numeric(10,2) NOT NULL,
+  M_SALES integer,
+  M_DESCRIPTION longtext,
+  M_IMAGE longblob NULL,
+  PRIMARY KEY (M_NAME),
+  FOREIGN KEY (SUP_ID) REFERENCES SUPPLIERS (SUP_ID)ON DELETE CASCADE);
+
+
+
+create table CLIENTS
+  (C_ID integer NOT NULL AUTO_INCREMENT,
+  C_NAME varchar(40) NOT NULL,
+  C_CITY varchar(20) NOT NULL,
+  C_EMAIL varchar(255) NOT NULL,
+  C_PASS VARCHAR(255) NOT NULL,
+  C_DESCRIPTION longtext,
+  C_MAGAZINE varchar(255) NULL,
+  C_INVOICE numeric(10,2)NULL,
+  C_IMAGE longblob NULL,
+  PRIMARY KEY (C_ID),
+  FOREIGN KEY (C_MAGAZINE) REFERENCES MAGAZINE (M_NAME)ON DELETE CASCADE);
+
+
+  
