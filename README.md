@@ -1,0 +1,2 @@
+# magazineua
+web magazine-trial
