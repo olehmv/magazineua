@@ -1,8 +1,12 @@
 package connection;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -11,19 +15,15 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
 
-import javax.sql.ConnectionPoolDataSource;
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
 
 public class JDBCUtils {
 
 	private static final String dbURL = "jdbc:mysql://localhost:3306/magazine";
-	private static final String dbURL1 = "jdbc:mysql://localhost:3306/magazine?autoReconnect=true&amp;allowMultiQueries=true";
-    private   String user="root";
-	private static final String user1 = "root";
-	private   String password="oleg";
-	private static final String password1 = "oleg";
+    private static  String user="root";
+	private  static String password="oleg";
 	private static BasicDataSource dataSource;
-	private static ConnectionPoolDataSource connectionPool;
 	private static Connection myConn;
 
 
@@ -46,7 +46,7 @@ public class JDBCUtils {
 					
 
 					Class.forName("com.mysql.jdbc.Driver");
-					myConn = DriverManager.getConnection(dbURL, user1, password1);
+					myConn = DriverManager.getConnection(dbURL, user, password);
 				} catch (SQLException | ClassNotFoundException e) {
 					e.printStackTrace();
 				}
@@ -54,9 +54,27 @@ public class JDBCUtils {
 
 			return myConn;
 	}
-	public static BasicDataSource getConnection(){
-		return dataSource;
-	}
+	public static DataSource getConnection(){
+		
+			Properties props = new Properties();
+			FileInputStream fis = null;
+			MysqlDataSource mysqlDS = null;
+			try {
+				fis = new FileInputStream("src\\main\\resources\\db.properties");
+				props.load(fis);
+				mysqlDS = new MysqlDataSource();
+				mysqlDS.setURL(props.getProperty("MYSQL_DB_URL"));
+				mysqlDS.setUser(props.getProperty("MYSQL_DB_USERNAME"));
+				mysqlDS.setPassword(props.getProperty("MYSQL_DB_PASSWORD"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return mysqlDS;
+		}
+		
+		
+		
+	
 	public DataSource lookUpConnection(String url) throws NamingException{
 		Context ctx = new InitialContext();
 		DataSource ds = (DataSource)ctx.lookup(url);

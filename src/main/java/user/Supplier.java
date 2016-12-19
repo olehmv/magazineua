@@ -49,6 +49,12 @@ public class Supplier {
 	public void setBlob(Blob blob) {
 		this.blob = blob;
 	}
+	@Override
+	public String toString() {
+		return "Supplier [id=" + id + ", name=" + name + ", city=" + city + ", price=" + price + ", clob=" + clob
+				+ ", blob=" + blob + "]";
+	}
+	
 
 }
 
