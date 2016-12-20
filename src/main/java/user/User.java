@@ -9,7 +9,7 @@ private	String firstName;
 private String email;
 private String password;
 private Blob blob;
-private String sity;
+private String city;
 private String magazine;
 private Clob desciption;
 private double invoice;
@@ -28,11 +28,11 @@ public User() {
 	public void setDesciption(Clob desciption) {
 		this.desciption = desciption;
 	}
-	public String getSity() {
-		return sity;
+	public String getCity() {
+		return city;
 	}
-	public void setSity(String sity) {
-		this.sity = sity;
+	public void setCity(String city) {
+		this.city = city;
 	}
 	
 	public Blob getBlob() {

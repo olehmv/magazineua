@@ -27,7 +27,7 @@ public class UserDaoImpl implements UserDao {
 		conn=JDBCUtils.getConnection();
 	}
 
-	private static final String ADD_PERSON = "insert into CLIENTS (`C_NAME`,`C_EMAIL`,`C_PASS`) values (?,?,?)";
+	private static final String ADD_PERSON = "insert into CLIENTS (`C_NAME`,`C_EMAIL`,`C_PASS`,'C_CITY) values (?,?,?,?)";
 	private static final String FIND_PERSON_BY_EMAIL = "select * from CLIENTS where C_EMAIL=? ";
 	private static final String FIND_ALL_PERSON = "select * from CLIENTS";
 	private static final String LOG_IN = "select * from CLIENTS where C_ID=?";
@@ -49,7 +49,7 @@ public class UserDaoImpl implements UserDao {
 		ResultSet rs = null;
 		User user = null;
 		PreparedStatement stm=null;
-		conn=JDBCUtils.getConnection();
+		//conn=JDBCUtils.getConnection();
 		try{
 			 con=conn.getConnection();
 			 stm=con.prepareStatement(FIND_PERSON_BY_EMAIL);
@@ -64,7 +64,7 @@ public class UserDaoImpl implements UserDao {
 				user.setEmail(rs.getString("C_EMAIL"));
 				user.setPassword(rs.getString("C_PASS"));
 				user.setImage(rs.getBlob("IMAGE"));
-				user.setSity(rs.getString("C_CITY"));
+				user.setCity(rs.getString("C_CITY"));
 			}
 			  }
 			} catch (SQLException e) {
@@ -73,16 +73,18 @@ public class UserDaoImpl implements UserDao {
 		return user;
 	
 }
-	public void insertUser(User user) {
+	public void addUser(User user) {
 		PreparedStatement stm = null;
 		ResultSet rs = null;
-	//	User user = null;
 		try{
 			 con=conn.getConnection();
 			stm=con.prepareStatement(ADD_PERSON,PreparedStatement.RETURN_GENERATED_KEYS);
 			stm.setString(1,user.getFirstName());
 			stm.setString(2, user.getEmail());
 			stm.setString(3, user.getPassword());
+			stm.setString(4, user.getCity());
+
+		
 			stm.executeUpdate();
 			ResultSet reslt=stm.getGeneratedKeys();
 			if(reslt.next()){
@@ -113,7 +115,7 @@ public class UserDaoImpl implements UserDao {
 				while(rs.next()){
 					user=new User();
 					user.setId(rs.getInt("C_ID"));
-					user.setSity(rs.getString("C_CITY"));
+					user.setCity(rs.getString("C_CITY"));
 					user.setFirstName(rs.getString("C_NAME"));
 					user.setEmail(rs.getString("C_EMAIL"));
 					user.setPassword(rs.getString("C_PASS"));

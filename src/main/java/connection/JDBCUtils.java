@@ -63,6 +63,9 @@ public class JDBCUtils {
 				fis = new FileInputStream("src\\main\\resources\\db.properties");
 				props.load(fis);
 				mysqlDS = new MysqlDataSource();
+				//Class.forName("com.mysql.jdbc.Driver");
+				//mysqlDS.setServerName(props.getProperty("MYSQL_DB_DRIVER_CLASS"));
+				//mysqlDS.setLogger(props.getProperty("MYSQL_DB_DRIVER_CLASS"));
 				mysqlDS.setURL(props.getProperty("MYSQL_DB_URL"));
 				mysqlDS.setUser(props.getProperty("MYSQL_DB_USERNAME"));
 				mysqlDS.setPassword(props.getProperty("MYSQL_DB_PASSWORD"));

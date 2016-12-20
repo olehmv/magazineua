@@ -14,7 +14,7 @@ public interface UserDao {
 	public void addDescriptionFromFile(String email,String file);
 	public String writeDescriptionToFile(String email,String file) ;
 	
-	void insertUser(User user);
+	void addUser(User user);
 	List getAllusers();
 	
 	User getUserByEmail(String mail);

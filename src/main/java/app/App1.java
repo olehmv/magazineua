@@ -21,14 +21,15 @@ public class App1 {
 		System.out.println(sup.getId());
 		//dao.addMagazine(dao.getSuplierByName("B"), new Magazine("Box",180.50));
 		System.out.println(sup);
-		Clob clob=sup.getClob();
-		Reader reader=clob.getCharacterStream();
-		int i=reader.read();
-		while(i>0){
-			System.out.print(i);
-		}
-		reader.close();
+		
 	}
 	
 
 }
+//Clob clob=sup.getClob();
+//Reader reader=clob.getCharacterStream();
+//int i=reader.read();
+//while(i>0){
+//	System.out.print(i);
+//}
+//reader.close();

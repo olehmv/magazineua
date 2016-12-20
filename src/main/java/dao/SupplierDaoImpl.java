@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import connection.JDBCUtils;
 import user.Magazine;
 import user.Supplier;
+import user.User;
 
 public class SupplierDaoImpl implements SupplierDao {
 	private static final String ADD_MAGAZINE="insert into MAGAZINE (M_NAME,SUP_ID,M_CITY,M_PRICE,M_DESCRIPTION,M_IMAGE"
@@ -59,6 +60,7 @@ public class SupplierDaoImpl implements SupplierDao {
 		
 		return sup;
 	}
+	
 
 	
 //	 (M_NAME varchar(255) NOT NULL,

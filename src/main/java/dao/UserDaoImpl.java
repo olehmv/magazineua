@@ -24,7 +24,7 @@ public class UserDaoImpl implements UserDao {
 		conn=JDBCUtils.getConnection1();
 	}
 
-	private static final String ADD_PERSON = "insert into CLIENTS (`C_NAME`,`C_EMAIL`,`C_PASS`) values (?,?,?)";
+	private static final String ADD_PERSON = "insert into CLIENTS (`C_NAME`,`C_EMAIL`,`C_PASS`,`C_CITY`) values (?,?,?,?)";
 	private static final String FIND_PERSON_BY_EMAIL = "select * from CLIENTS where C_EMAIL=? ";
 	private static final String FIND_ALL_PERSON = "select * from CLIENTS";
 	private static final String LOG_IN = "select * from CLIENTS where C_ID=?";
@@ -49,25 +49,24 @@ public class UserDaoImpl implements UserDao {
 			 stm=conn.prepareStatement(FIND_PERSON_BY_EMAIL);
 			 stm.setString(1, mail);
 			  rs=stm.executeQuery();
-			  if(rs!=null){
-				user=new User();
+			  user=new User();
 			while(rs.next()){
 				user.setId(rs.getInt("C_ID"));
 				user.setFirstName(rs.getString("C_NAME"));
 				user.setDesciption(rs.getClob("C_DESCRIPTION"));
 				user.setEmail(rs.getString("C_EMAIL"));
 				user.setPassword(rs.getString("C_PASS"));
-				user.setImage(rs.getBlob("IMAGE"));
-				user.setSity(rs.getString("C_CITY"));
+				user.setImage(rs.getBlob("C_IMAGE"));
+				user.setCity(rs.getString("C_CITY"));
 			}
-			  }
+			  
 			} catch (SQLException e) {
 			e.printStackTrace();
 			}
 		return user;
 	
 }
-	public void insertUser(User user) {
+	public void addUser(User user) {
 		PreparedStatement stm = null;
 		ResultSet rs = null;
 	//	User user = null;
@@ -76,6 +75,9 @@ public class UserDaoImpl implements UserDao {
 			stm.setString(1,user.getFirstName());
 			stm.setString(2, user.getEmail());
 			stm.setString(3, user.getPassword());
+			stm.setString(4, user.getCity());
+
+			
 			stm.executeUpdate();
 			ResultSet reslt=stm.getGeneratedKeys();
 			if(reslt.next()){

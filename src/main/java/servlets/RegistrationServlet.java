@@ -1,10 +1,7 @@
 package servlets;
 
-
 import java.io.IOException;
-import java.sql.Blob;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
@@ -19,29 +16,22 @@ import dao.UserDaoImpl;
 import user.User;
 
 /**
- * Servlet implementation class LoginSerlet
+ * Servlet implementation class RegistrationServlet
  */
-public class LoginSerlet extends HttpServlet {
+public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	UserDao dao;
-	User user;
-	String desc;
-	Blob blob;
-	List <User> list;
+     User user;
+     UserDao dao;
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public LoginSerlet() {
-    	
-    	
-    }
-
+   
 	/**
 	 * @see Servlet#init(ServletConfig)
 	 */
 	public void init(ServletConfig config) throws ServletException {
+		user=new User();
 		dao=new UserDaoImpl();
-		list=new ArrayList<>();
 	}
 
 	/**
@@ -54,15 +44,22 @@ public class LoginSerlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			response.setContentType("text/html");
-			user=dao.getUserByEmail(request.getParameter("email"));
-			if(user.getFirstName()!=null){
-			request.setAttribute("login", user);
-			RequestDispatcher view=request.getRequestDispatcher("login.jsp");
-			view.forward(request, response);
-			}else{
-				response.sendRedirect("\\index.html");
-			}
+		//String [] str=request.getParameterValues("parram name");//return all param,only with same parram name
+		 String name =request.getParameter("username");
+		 String email=request.getParameter("email");
+		 String pass=request.getParameter("pass");
+		 String city=request.getParameter("city");
+
+
+		user.setFirstName(name);
+		user.setEmail(email);
+		user.setPassword(pass);
+		user.setCity(city);
+		dao.addUser(user);
+		request.setAttribute("registration", user);
+		RequestDispatcher view=request.getRequestDispatcher("registration.jsp");
+		view.forward(request, response);
+		
 	}
 
 }

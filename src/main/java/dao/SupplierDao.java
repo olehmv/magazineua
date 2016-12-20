@@ -5,6 +5,7 @@ import java.sql.Clob;
 
 import user.Magazine;
 import user.Supplier;
+import user.User;
 
 public interface SupplierDao {
 	Supplier getSuplierByName(String name);
@@ -13,6 +14,7 @@ public interface SupplierDao {
 	void setSupplierImage(String name);
 	Blob getSupplierImage(String name);
 	void addMagazine(Supplier supName,Magazine mag);
+
 	
 	
 	
