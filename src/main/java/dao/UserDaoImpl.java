@@ -69,7 +69,6 @@ public class UserDaoImpl implements UserDao {
 	public void addUser(User user) {
 		PreparedStatement stm = null;
 		ResultSet rs = null;
-	//	User user = null;
 		try{
 			stm=conn.prepareStatement(ADD_PERSON,PreparedStatement.RETURN_GENERATED_KEYS);
 			stm.setString(1,user.getFirstName());

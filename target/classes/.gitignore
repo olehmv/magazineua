@@ -1,8 +1,4 @@
-/app/
-/connection/
-/dao/
-/service/
+/META-INF/
 /servlets/
 /user/
-/datasourcedao/
-/META-INF/
+/listeners/

@@ -37,6 +37,7 @@ public class JDBCUtils {
 		Context ctx = new InitialContext();
 		ctx.bind("jdbc/magazine", dataSource);
 	}
+	 
 	 public JDBCUtils() {
 	}
 	 

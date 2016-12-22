@@ -1,0 +1,44 @@
+ <servlet>
+  <servlet-name>ligin_jsp</servlet-name>
+  <jsp-file>login.jsp</jsp-file>
+  <init-param>
+  <param-name>name</param-name>
+  <param-value>oleg<p/param-value>
+  </init-param>
+  </servlet>
+  //	 <jsp-config>
+//	  <jsp-property-group>
+//	  <url-pattern>*.jsp</url-pattern>
+//	  <scripting-invalid>true</scripting-invalid> disable scripting in jsp
+//	  </jsp-property-group>  
+//	  </jsp-config>
+		<el-ignord>true</el-ignord> disable El in 	  <url-pattern>*.jsp</url-pattern>
+		
+
+ <%! public void jspInit(){
+    	ServletConfig config=getServletConfig();
+    	String name=config.getInitParameter("name");
+    	ServletContext ctx=getServletContext();
+    	ctx.setAttribute("name", name);
+    }
+    %>
+    <%= application.getAttribute("name")+"- application context" %>
+    <%= pageContext.findAttribute("name")+"- find attribute in any scope" %>
+    
+    
+    <%User user=(User)session.getAttribute("login");
+    out.print(user.getFirstName()+" ");
+    out.print(user.getCity()+" ");
+    out.print(user.getEmail()+" ");
+  
+    
+    %>
+    
+    <el-enabled>true</el-enabled>
+    
+        <scripting-enabled>true</scripting-enabled>
+    
+    
+    <!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
