@@ -35,7 +35,7 @@ public class JDBCUtils {
 		dataSource.setPassword(password);
 		dataSource.setUrl("jdbc:mysql://localhost:3306/magazine");
 		Context ctx = new InitialContext();
-		ctx.bind("jdbc/magazine", dataSource);
+		ctx.bind("jdbc/magazine",  dataSource);
 	}
 	 public JDBCUtils() {
 	}
